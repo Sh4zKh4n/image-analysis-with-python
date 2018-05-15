@@ -18,6 +18,27 @@ import scipy.ndimage as ndi
 
 ## Defining the pipeline function
 def run_pipeline(dirpath, filename):
+    """Run 2D single-cell segmentation pipeline optimized for membrane-labeled
+    spinning-disk confocal images of membrane markers in zebrafish early embryos.
+    
+    Parameters
+    ----------
+    dirpath : string
+        Path to the directory containing the input image.
+    filename : string
+        Name of the input file, including file ending (should be .tif).
+    
+    Returns
+    -------
+    clean_ws : 3D numpy array of same shape as input image
+        The single-cell segmentation. Every cell is labeled with a unique
+        integer ID. Background is 0.
+    results : dict
+        A number of measurements extracted from each cell. The dict keys 
+        name the type of measurement. The dict values are lists containing
+        the measured values. The order of all lists is the same and relates
+        to the segmentation IDs through the list in results['cell_id'].
+    """
 
 
     ## Importing & Handling Image Data
@@ -126,6 +147,4 @@ def run_pipeline(dirpath, filename):
         
     ## Returning the results
     return clean_ws, results
-
-
 
