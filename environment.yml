@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - imageio
+  - numpy
+  - requests
+  - scikit-image
