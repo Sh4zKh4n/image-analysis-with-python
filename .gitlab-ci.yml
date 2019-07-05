@@ -1,0 +1,17 @@
+image: continuumio/miniconda:latest
+variables:
+  # JEKYLL_ENV: production
+  # LC_ALL: C.UTF-8
+  TEST_ENV_NAME: test-env
+
+before_script:
+  - conda update -y -c conda-forge -c defaults conda
+  - conda env create -n ${TEST_ENV_NAME} --file environment.yml
+  - conda install -c conda-forge -c defaults -n ${TEST_ENV_NAME} jupyter
+
+
+test:
+  stage: test
+  script:
+    - conda activate ${TEST_ENV_NAME}
+    - jupyter nbconvert --to notebook --ExecutePreprocessor.kernel_name=python3 --execute image-analysis-session/*.ipynb
